@@ -22,6 +22,7 @@ type SentimentContextType = {
 	isPending: boolean
 	isSuccess: boolean
 	sendLocationData: UseMutateAsyncFunction<
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		any,
 		Error,
 		SendLocationDataProps,
