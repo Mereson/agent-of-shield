@@ -5,7 +5,7 @@ import { Charts } from "../components"
 import { useSentimentContext } from "../context/useSentimentData"
 import { useSentimentOptions } from "@/lib/hooks"
 // import { SentimentOutput } from "@/lib/utils"
-
+import Markdown from "react-markdown"
 
 export const Sentiment = () => {
 	const { data, isPending, isSuccess } = useSentimentContext()
@@ -15,8 +15,7 @@ export const Sentiment = () => {
 		distributionOption,
 		categorizationOption,
 		timeSeriesOption,
-		summaryData,
-	} = useSentimentOptions({ sentimentData: data?.result })
+	} = useSentimentOptions({ sentimentData: data?.result.metrics })
 
 	// const {
 	// 	distributionOption,
@@ -25,10 +24,16 @@ export const Sentiment = () => {
 	// 	summaryData,
 	// } = useSentimentOptions({ sentimentData: sampleData })
 
-	
-	if (isPending) return <div>...</div>
-
-	
+	if (isPending)
+		return (
+			<section className="w-screen grid place-content-center mt-6 mb-12">
+				<main className="w-[57.875rem]">
+					<Typography tag="h2" variant="h2" align="center">
+						LOADING... Will take a while, please be patient
+					</Typography>
+				</main>
+			</section>
+		)
 
 	return (
 		<>
@@ -39,24 +44,35 @@ export const Sentiment = () => {
 							<Typography tag="h2" variant="h2">
 								Overall Sentiment
 							</Typography>
-							<Typography variant="body-r">
-								{summaryData || "No summary to display"}
+							<Typography tag="div" variant="body-r">
+								<Markdown>
+									{data?.result.reportText || "#No summary to display"}
+								</Markdown>
 							</Typography>
 						</div>
 						<div>
-							<Charts title={"Sentiment Distribution"} option={distributionOption} />
+							<Charts
+								title={"Sentiment Distribution"}
+								option={distributionOption}
+							/>
 						</div>
 						<div>
 							<Typography tag="h2" variant="h2">
 								Recent Sentiment Trends
 							</Typography>
-							<Charts title={"Sentiment Trend Over Time"} option={timeSeriesOption} />
+							<Charts
+								title={"Sentiment Trend Over Time"}
+								option={timeSeriesOption}
+							/>
 						</div>
 						<div>
 							<Typography tag="h2" variant="h2">
 								Sentiment by Category
 							</Typography>
-							<Charts title={"Sentiment by Category"} option={categorizationOption} />
+							<Charts
+								title={"Sentiment by Category"}
+								option={categorizationOption}
+							/>
 						</div>
 					</main>
 				</section>
@@ -64,8 +80,6 @@ export const Sentiment = () => {
 		</>
 	)
 }
-
-
 
 // const sampleData: SentimentOutput[] = [
 // 	{

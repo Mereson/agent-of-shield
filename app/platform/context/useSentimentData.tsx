@@ -11,9 +11,24 @@ import { SendLocationDataProps, useSendLocationData } from "@/lib/app"
 import { UseMutateAsyncFunction } from "@tanstack/react-query"
 import { SentimentOutput } from "@/lib/utils"
 
+// type BackendResult = {
+// 	location: string
+// 	result: SentimentOutput[]
+// }
+
+export type Sentiment = "Positive" | "Neutral" | "Negative"
+
 type BackendResult = {
-	location: string
-	result: SentimentOutput[]
+	result: {
+		reportText: string
+		metrics: SentimentOutput[]
+	}
+}
+
+export interface Article {
+	title: string | null
+	url: string
+	snippet: string
 }
 
 type SentimentContextType = {
@@ -22,7 +37,7 @@ type SentimentContextType = {
 	isPending: boolean
 	isSuccess: boolean
 	sendLocationData: UseMutateAsyncFunction<
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		any,
 		Error,
 		SendLocationDataProps,

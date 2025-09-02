@@ -17,15 +17,15 @@ export interface SendLocationDataProps {
 	currentDate: string
 }
 
-
 /**
  * -------------------------------
  * ---- ANALYZE LOCATION DATA ----
  * -------------------------------
  */
 
-const sendLocationDataRequest = async (data: SendLocationDataProps) => {
-	console.log(data)
+const sendLocationDataRequest = async (locationData: SendLocationDataProps) => {
+	console.log(locationData)
+	const data = { location: locationData.location.name }
 	const res = await fetch("/api/post", {
 		method: "POST",
 		headers: {
@@ -49,6 +49,3 @@ export const useSendLocationData = () =>
 	useMutation({
 		mutationFn: sendLocationDataRequest,
 	})
-
-
-	

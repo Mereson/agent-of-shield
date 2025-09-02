@@ -28,4 +28,25 @@ export type SentimentOutput =
   | { type: "categorization"; data: CategorizationData };
 
 
-  
+  // (
+	// 	| { type: "summary"; data: string }
+	// 	| { type: "distribution"; data: { sentiment: Sentiment; value: number }[] }
+	// 	| {
+	// 			type: "time_series"
+	// 			data: {
+	// 				time: string
+	// 				Neutral: number
+	// 				Positive: number
+	// 				Negative: number
+	// 			}[]
+	// 	  }
+	// 	| {
+	// 			type: "categorization"
+	// 			data: {
+	// 				category: string
+	// 				Neutral: number
+	// 				Positive: number
+	// 				Negative: number
+	// 			}[]
+	// 	  }
+	// )[]
